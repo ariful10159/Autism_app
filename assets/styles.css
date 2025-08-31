@@ -1,0 +1,446 @@
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+/*
+ * Main stylesheet for ASD Detection App
+ *
+ * The styling here is intentionally simple, focusing on mobile
+ * responsiveness and readability. Colors are used sparingly and
+ * whitespace is prioritized to improve user focus. If you wish to
+ * customize the look and feel further, you can edit these styles.
+ */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f5f6fa;
+    color: #333;
+}
+
+/* Define primary theme colors as CSS variables */
+:root {
+    --primary-color: #6C63FF;
+    --primary-dark: #5245cf;
+    --accent-color: #48C6EF;
+    --background-card: #ffffff;
+    --background-page: #f5f6fa;
+    --text-color: #333;
+}
+
+header {
+    /* Use a vibrant gradient instead of a solid color */
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+main {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--background-card);
+    padding: 1.2rem 0.7rem;
+    box-sizing: border-box;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    margin-bottom: 1.5rem;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="file"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 0.6rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button,
+input[type="submit"] {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    /* Center buttons horizontally */
+    display: block;
+    margin: 0.7rem auto;
+    transition: background-color 0.2s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: var(--primary-dark);
+}
+
+.link {
+    margin-top: 0.8rem;
+    text-align: center;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: #dc3545;
+    margin-top: 0.5rem;
+}
+
+/* Header image wrapper */
+.header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-wrapper img {
+    width: 40px;
+    height: auto;
+    margin-right: 0.5rem;
+}
+
+.success {
+    color: #28a745;
+    margin-top: 0.5rem;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.nav a {
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.nav a:hover {
+    background-color: var(--primary-dark);
+}
+
+.image-preview {
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    display: none;
+}
+
+.image-preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.question {
+    margin-bottom: 0.4rem;
+}
+
+.question label {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+form input[type="radio"] {
+    transform: scale(0.95);
+    margin-right: 0.15rem;
+}
+}
+
+.suggestions {
+    list-style: none;
+    padding-left: 0;
+}
+
+.suggestions li {
+    background-color: #F8F8FE;
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Container for suggestions section */
+.suggestions-box {
+    background-color: var(--background-card);
+    padding: 1rem 0.7rem;
+    box-sizing: border-box;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 500px;
+}
+
+/*
+ * Responsive mobile header and navigation
+ *
+ * A modern, mobile‑first header with a hamburger menu that reveals
+ * primary navigation links when tapped. The nav uses a hidden
+ * checkbox (#menu-toggle) to track open/closed state, so no
+ * JavaScript is required. The burger icon transforms into an
+ * “X” when the menu is open. Nav links stack vertically and are
+ * clearly spaced for touch input.
+ */
+
+/* hide the actual checkbox */
+#menu-toggle {
+    display: none;
+}
+
+/* mobile header container */
+.mobile-header {
+    /* Gradient header with flexible width matching body */
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    position: relative;
+    /* Constrain header width to match content width */
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* logo and title wrapper */
+.logo-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.logo-name img {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+/* hamburger button */
+.burger {
+    width: 32px;
+    height: 24px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.burger span {
+    display: block;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* transform burger into an X when checked */
+#menu-toggle:checked + .mobile-header .burger span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+#menu-toggle:checked + .mobile-header .burger span:nth-child(2) {
+    opacity: 0;
+}
+#menu-toggle:checked + .mobile-header .burger span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* mobile navigation container */
+/*
+ * Mobile navigation container
+ * Hidden by default (max-height 0). Constrain width to match the main content
+ * area so the navigation panel does not span the entire viewport on large
+ * screens. The menu will expand vertically when the hamburger is toggled.
+ */
+.mobile-nav {
+    max-height: 0;
+    overflow: hidden;
+    background: var(--background-card);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: max-height 0.3s ease;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+/* show nav when menu-toggle checked */
+#menu-toggle:checked ~ .mobile-nav {
+    max-height: 500px;
+}
+.mobile-nav a {
+    display: block;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #eee;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+.mobile-nav a:last-child {
+    border-bottom: none;
+}
+.mobile-nav a:hover {
+    background-color: #f5f6fa;
+}
+
+/* evaluation card for ASD results */
+.evaluation-card {
+    background-color: var(--background-card);
+    padding: 1rem 0.7rem;
+    box-sizing: border-box;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    margin-bottom: 1.5rem;
+    width: 100%;
+    max-width: 500px;
+    text-align: left;
+}
+.evaluation-card h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.badge-asd {
+    background-color: #fbd78c;
+    color: #7a5200;
+}
+.badge-monitor {
+    background-color: #bde6ff;
+    color: #004c7a;
+}
+.badge-noas {
+    background-color: #c8f7dc;
+    color: #035f36;
+}
+.evaluation-note {
+    font-size: 0.9rem;
+    margin: 0.75rem 0;
+    color: #555;
+}
+.stat-group {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+.stat-chip {
+    min-width: 120px;
+    box-sizing: border-box;
+@media (max-width: 600px) {
+    .question label {
+        font-size: 0.97rem;
+    }
+    .container {
+        padding: 0.4rem 0.1rem;
+    }
+    .question {
+        margin-bottom: 0.2rem;
+    }
+    form input[type="radio"] {
+        transform: scale(0.9);
+        margin-right: 0.1rem;
+    }
+    html, body {
+        width: 100vw;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+    .container, .suggestions-box, .evaluation-card, .mobile-header, .mobile-nav {
+        max-width: 100vw;
+        border-radius: 0;
+        box-shadow: none;
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+    }
+    .stat-group {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+    .stat-chip {
+        min-width: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .mobile-header, .mobile-nav {
+        margin: 0;
+    }
+    main {
+        padding: 0.5rem 0.1rem;
+    }
+    .image-preview {
+        max-width: 100vw;
+    }
+}
+    background-color: #f8f8fe;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    flex: 1 1 45%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+.stat-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    margin-bottom: 0.2rem;
+    color: #555;
+}
+.stat-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+.disclaimer {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 0.8rem;
+}
