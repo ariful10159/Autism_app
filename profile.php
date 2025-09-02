@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </select>
                 <label for="photo">Profile Photo (optional)</label>
                 <input type="file" name="photo" id="photo" accept="image/*">
-                <input type="submit" value="Update Profile">
+                <input type="submit" value="">
             </form>
         </div>
     </main>
